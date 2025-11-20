@@ -1,0 +1,9 @@
+{
+  "name": "AgriWave",
+  "description": "A platform to digitally recognize and reward everyday farming work through AI validation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

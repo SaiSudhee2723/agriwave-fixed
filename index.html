@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgriWave</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              // Modern Vibrant Emerald/Teal for Agriculture + Tech
+              primary: {
+                50: '#ecfdf5',
+                100: '#d1fae5',
+                200: '#a7f3d0',
+                300: '#6ee7b7',
+                400: '#34d399',
+                500: '#10b981', // Base Brand Color
+                600: '#059669',
+                700: '#047857',
+                800: '#065f46',
+                900: '#064e3b',
+                950: '#022c22',
+              },
+              // Warm Harvest Gold/Amber
+              secondary: {
+                50: '#fffbeb',
+                100: '#fef3c7',
+                200: '#fde68a',
+                300: '#fcd34d',
+                400: '#fbbf24',
+                500: '#f59e0b',
+                600: '#d97706',
+                700: '#b45309',
+                800: '#92400e',
+                900: '#78350f',
+                950: '#451a03',
+              },
+              // Deep Blue-Gray for modern dark mode surfaces
+              surface: {
+                50: '#f8fafc',
+                100: '#f1f5f9',
+                200: '#e2e8f0',
+                300: '#cbd5e1',
+                400: '#94a3b8',
+                500: '#64748b',
+                600: '#475569',
+                700: '#334155',
+                800: '#1e293b',
+                900: '#0f172a',
+                950: '#020617', // Deepest Void
+              }
+            },
+            animation: {
+              blob: "blob 7s infinite",
+              'fade-in': 'fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              blob: {
+                "0%": { transform: "translate(0px, 0px) scale(1)" },
+                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                "100%": { transform: "translate(0px, 0px) scale(1)" },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            },
+          },
+        },
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        scroll-behavior: smooth;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent; 
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #020617; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #34d399; 
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #10b981; 
+      }
+
+      /* --- SCROLL ANIMATIONS --- */
+      .animate-on-scroll {
+        opacity: 0;
+        will-change: transform, opacity;
+        transition-property: transform, opacity;
+        transition-duration: 0.8s;
+        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); /* Custom easing for premium feel */
+      }
+
+      .animate-fade-up {
+        transform: translateY(40px);
+      }
+
+      .animate-fade-down {
+        transform: translateY(-40px);
+      }
+
+      .animate-fade-left {
+        transform: translateX(-40px);
+      }
+
+      .animate-fade-right {
+        transform: translateX(40px);
+      }
+
+      .animate-zoom-in {
+        transform: scale(0.92);
+      }
+
+      /* Visible State */
+      .animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translate(0) scale(1);
+      }
+
+      /* Delays */
+      .delay-100 { transition-delay: 100ms; }
+      .delay-200 { transition-delay: 200ms; }
+      .delay-300 { transition-delay: 300ms; }
+      .delay-400 { transition-delay: 400ms; }
+      .delay-500 { transition-delay: 500ms; }
+
+      /* Reduced Motion / Mobile Optimization */
+      @media (max-width: 768px) {
+        .animate-on-scroll {
+          transition-duration: 0.6s;
+        }
+        .animate-fade-up { transform: translateY(20px); }
+        .animate-fade-down { transform: translateY(-20px); }
+        .animate-fade-left { transform: translateX(-20px); }
+        .animate-fade-right { transform: translateX(20px); }
+        .animate-zoom-in { transform: scale(0.96); }
+        
+        /* Optional: Disable heavy delays on mobile for snappier feel */
+        .delay-300, .delay-400, .delay-500 { transition-delay: 100ms; }
+      }
+
+      /* --- FUTURISTIC AGRI-TECH BACKGROUND --- */
+      .agri-tech-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -50;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      /* Base Layer: Soft Gradients + Tech Grid */
+      .agri-tech-bg::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        /* Light Mode: Mint/Teal/Warm Yellow gradients */
+        background: 
+            /* Subtle Grid Pattern for "Tech" feel */
+            linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+            linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+            /* Soft atmospheric gradient */
+            linear-gradient(135deg, #ecfdf5 0%, #fefce8 50%, #f0fdf4 100%);
+        background-size: 60px 60px, 60px 60px, 100% 100%;
+      }
+
+      /* Overlay Layer: Abstract Fields / Glows */
+      .agri-tech-bg::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Organic glowing shapes representing fields/crops */
+        background: 
+            radial-gradient(circle at 15% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+            radial-gradient(circle at 85% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 40%);
+        filter: blur(60px);
+      }
+
+      /* Dark Mode Overrides */
+      html.dark .agri-tech-bg::before {
+        background: 
+            /* Fainter grid for dark mode */
+            linear-gradient(90deg, rgba(52, 211, 153, 0.04) 1px, transparent 1px),
+            linear-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px),
+            /* Deep tech gradient */
+            linear-gradient(135deg, #020617 0%, #064e3b 60%, #022c22 100%);
+      }
+
+      html.dark .agri-tech-bg::after {
+        background: 
+            radial-gradient(circle at 15% 90%, rgba(52, 211, 153, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+      }
+
+      /* Subtle decorative elements (Optional Dotted Pattern) */
+      .agri-dots {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-image: radial-gradient(currentColor 1px, transparent 1px);
+         background-size: 40px 40px;
+         opacity: 0.05;
+         color: #10b981;
+         mask-image: linear-gradient(to bottom, black, transparent);
+         -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="transition-colors duration-500 ease-in-out text-surface-900 dark:text-surface-50">
+    <div class="agri-tech-bg">
+       <div class="agri-dots"></div>
+    </div>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
